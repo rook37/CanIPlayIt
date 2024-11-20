@@ -19,10 +19,10 @@ Gamers
 
 List the functionality that your app will include. These can be written as user stories or descriptions with related details. Do not describe _how_ these features are implemented, only _what_ needs to be implemented.
 
-- As a user, I want to be able to filter the games library by subscription service or genre
+- As a user, I want to be able to filter the games library by subscription service
+- As a user, I want to be able to filter the games library by genre
+- As a user, I want to be able to filter the games library by platform
 - As a user, I want to be able to search the games library for specific games to see where they're available
-- As a user,
-- Ideally, an alert or wishlist system that lets you save games to your profile (along with your subscriptions) and receive an email when it is added to that service
 
 ## Implementation
 
@@ -132,7 +132,8 @@ Sample game object GET response:
 * Feature: filter by genre
   * implement the ability to filter by genre
   * create GET endpoint for that array
-* Update pages to fix edge cases and bugs
+* Finalize design and logo
+* Bugfixing and QA testing for edge cases
 
 ---
 
