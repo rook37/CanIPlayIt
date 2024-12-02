@@ -12,14 +12,14 @@ To get a local copy up and running follow these simple example steps.
 ### Installation
 
 
-1. Install NPM packages.
+#### 1. Install NPM packages.
 
 - In both /client/CanIPlay and /server, run
 
   ```sh
   npm i
   ```
-2. Set up your database.
+#### 2. Set up your database.
 
 - Create a local mysql db named games, with an .env file providing its information to /server/knexfile.js
 
@@ -30,7 +30,7 @@ To get a local copy up and running follow these simple example steps.
   ```
 - This will load the database with the provided data in games.json, which has been gathered from various public APIs.
 
-3. Initialize the server.
+#### 3. Initialize the server.
 
 - In /server, run
 
@@ -38,7 +38,7 @@ To get a local copy up and running follow these simple example steps.
   node index.js
   ```
 
-4. Initialize the client.
+#### 4. Initialize the client.
 
 - In /client/CanIPlay, run
 
@@ -52,25 +52,25 @@ To get a local copy up and running follow these simple example steps.
 
 - Navigate to /server/helper, then run these files:
 
-1. First, pull all the raw game data:
+#### 1. First, pull all the raw game data:
 `node dataScraper.js`
 
-2. Next, we need to build game objects with the IDs we've received
+#### 2. Next, we need to build game objects with the IDs we've received
 `node xbGameBuilder.js`
 
 
-3. Then, pull PS+ and their Ubi+ Classics offering
+#### 3. Then, pull PS+ and their Ubi+ Classics offering
    `node psGameBuilder.js`
 
-4. After that, we need to populate missing fields using the IGDB API
+#### 4. After that, we need to populate missing fields using the IGDB API
  `node updateIGDB.js`
 
-5. Now, sort through genres and collapse similar ones into one set
+#### 5. Now, sort through genres and collapse similar ones into one set
 `node genreSet.js`
 
   - Check the log or data/failedGames.json to see if any failed to populate.
 
-6. Finally, your data should be updated and ready to enter the database!
+#### 6. Finally, your data should be updated and ready to enter the database!
 `node insertGames.js`
 
 As mentioned, the data is already provided - but if you want to try it yourself, these are the steps!
