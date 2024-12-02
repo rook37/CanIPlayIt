@@ -69,7 +69,7 @@ for(let gameObj of list){
             }
             game.genre = (response.Products[0].Properties.Categories !==null) ? response.Products[0].Properties.Categories : [response.Products[0].Properties.Category] 
             
-            //console.log(`Adding ${game.title} - ${serviceName}`)
+      
             let platforms = response.Products[0].DisplaySkuAvailabilities[0].Availabilities[0].Conditions.ClientConditions.AllowedPlatforms;
     
             //if it's on two platforms in the xbAllupdatedGames list, that means PC + Xbox

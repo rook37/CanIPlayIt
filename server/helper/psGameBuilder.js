@@ -8,11 +8,6 @@ const regex = /(\s?-\s?PS5[™®]? & PS4[™®]?\s?|\s?\(PS4[™®]? & PS5[™®
 //some games have specific PS4/PS5 editions but if its one for both, it should map to
 //the same game object as the xbox or PC equivalent. 
 
-//fun fact: had to add a special clause for (PS5 & PS4) because apparently the makers of 
-//Skyrim Special Edition do consider themselves both special and outside the linear progression of time. 
-
-
-
 
 const psJSONToGamesList = (list) =>{
   return list.flatMap(obj => obj.games)
@@ -23,8 +18,7 @@ function capsFirst(string) {
 }
 
 const updatePSPlus = async () => {
-    //this should be updated later with API calls to update this list instead of using local data
-    //alternatively: setup dataScraper.js calls to build those files with set names, then this is good. 
+    
 
 let plus =  psJSONToGamesList(JSON.parse(fs.readFileSync(`json/PSPlus.json`)))
 let plusClassic =  psJSONToGamesList(JSON.parse(fs.readFileSync(`json/PSClassics.json`)))
@@ -32,9 +26,6 @@ let psUbiClassic = psJSONToGamesList(JSON.parse(fs.readFileSync(`json/PSUbiClass
 let games = JSON.parse(fs.readFileSync(`data/games.json`))
 
 
- // everything has PS+ premium applied, Ubi+Extra get Extra, Extra is the only one that gets one. 
- // currently, there do not appear to be duplicates, so we should not have to worry about this function touching the
- // same game twice. 
  
  let s = ["PS+ Premium","PS+ Extra","Ubi+ Classics"];
 
@@ -45,15 +36,9 @@ let games = JSON.parse(fs.readFileSync(`data/games.json`))
  console.log(`Saving update - ${games.length} games stored`)
 
  let problemc=0;
-//  games.forEach( gm =>{
 
-//   if(gm.title.includes("PS4")||gm.title.includes("PS5"))
-//     {
-//     console.log(gm.title);
-//     problemc++;
-//   }})
 console.log(problemc)
- //i don't think this sort is actually working yet. /////////////////////////////////////////////////////
+
  games.sort((a,b)=>{
     return (a.title < b.title)
  })
@@ -115,7 +100,7 @@ for(let gameObj of list){
                 platforms: gameObj.device,
                 subscriptions:services
             }
-            //console.log(`Adding ${game.title} - ${services[services.length-1]}`)
+    
             newCount++;
             updatedGames.push(game);
 
