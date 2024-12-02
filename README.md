@@ -2,150 +2,198 @@
 
 ## Overview
 
-A website called CanIPlayIt, which displays a wide database of video games on different platforms and services, that you can sort and search through to find various games and the services they're offered on - linking back to their proprietary stores.
+Can I Play It, a web applicaton which displays a wide database of video games on different platforms and services, that can be sorted through and searched to find various games and the services they're offered on
 
-### Problem Space
+## Getting Started
 
-When someone wants to watch a show, they have to go look up which streaming service it's available on - Disney+, Netflix, etc. Similarly, many subscription and streaming services have emerged for video games in recent years - this site will provide that information quickly. If you have subscriptions for Humble Bundle, Game Pass, and Playstation Plus, you can just check here and see if you already have access to a game before going to buy it.
+This is an example of how you may give instructions on setting up your project locally.
+To get a local copy up and running follow these simple example steps.
 
-### User Profile
+### Installation
 
-Gamers
 
-- that play a lot of video games and have multiple subscriptions
-- have multiple platforms to potentially play on
+1. Install NPM packages.
 
-### Features
+- In both /client/CanIPlay and /server, run
 
-List the functionality that your app will include. These can be written as user stories or descriptions with related details. Do not describe _how_ these features are implemented, only _what_ needs to be implemented.
+  ```sh
+  npm i
+  ```
+2. Set up your database.
 
-- As a user, I want to be able to filter the games library by subscription service
-- As a user, I want to be able to filter the games library by genre
-- As a user, I want to be able to filter the games library by platform
-- As a user, I want to be able to search the games library for specific games to see where they're available
+- Create a local mysql db named games, with an .env file providing its information to /server/knexfile.js
 
-## Implementation
+- In /server, run
+  ```sh
+  npx knex migrate:latest
+  node /helper/insertGames.js
+  ```
+- This will load the database with the provided data in games.json, which has been gathered from various public APIs.
+
+3. Initialize the server.
+
+- In /server, run
+
+  ```sh
+  node index.js
+  ```
+
+4. Initialize the client.
+
+- In /client/CanIPlay, run
+
+  ```sh
+  npm run dev
+  ```
+
+### Data Setup
+
+- /server/helper/data/games.json comes prepopulated with game data, but with the provided API endpoints in an .env file, the data can be rebuilt locally.
+
+- Navigate to /server/helper, then run these files:
+
+1. First, pull all the raw game data:
+`node dataScraper.js`
+
+2. Next, we need to build game objects with the IDs we've received
+`node xbGameBuilder.js`
+
+
+3. Then, pull PS+ and their Ubi+ Classics offering
+   `node psGameBuilder.js`
+
+4. After that, we need to populate missing fields using the IGDB API
+ `node updateIGDB.js`
+
+5. Now, sort through genres and collapse similar ones into one set
+`node genreSet.js`
+
+  - Check the log or data/failedGames.json to see if any failed to populate.
+
+6. Finally, your data should be updated and ready to enter the database!
+`node insertGames.js`
+
+As mentioned, the data is already provided - but if you want to try it yourself, these are the steps!
+
+## Usage
+
+![Homepage](image/image.png)
+
+From the home page, a user can click on a game, navigate through the pages of the database, search, or click on different categories to filter the database by subscription service, platform, or genre. 
+  - Filters work with OR, not AND
+  - Hovering over a game will pop up with the title and genres
+
+####  Hover:
+
+![Hover](image/image-5.png)
+
+#### Sample search:
+
+![sample search](image/image-3.png)
+
+#### Game Page
+![Game Page](image/image-4.png)
+ - The game page shows the game's description, developers, publisher, genres, and what subscription services it's available on.
+ - Each of the subscription service boxes has a link to the homepage filtered by that service, and to the respective provider's site to sign up
+
 
 ### Tech Stack
 
-List technologies that will be used in your app, including any libraries to save time or provide more functionality. Be sure to research any potential limitations.
-
 - React
-  - libraries for searching and structuring the library
-- Express server back-end
-- MYSQL Database that's periodically updated or setTimeout.
+- Express
+- MYSQL 
 
-### APIs
-
-* External APIs will update the database periodically from the Xbox and Playstation store, which also has endpoints for Ubisoft+ and EA Play games available on those platforms.
-* IGDB API will be used to populate missing data (such as description from the Playstation store call)
-
-### Sitemap
-
-- Home page and general library page with a nav bar for filtering by game, genre, or platform.
-- Search results
-- Game page, with all the information for that game in particular
-
-### Mockups
-
-![1732085912873](image/CapstoneProposal-SanjayBudhia/1732085912873.png)
-
-![1732085922090](image/CapstoneProposal-SanjayBudhia/1732085922090.png)
-
-![1732085929516](image/CapstoneProposal-SanjayBudhia/1732085929516.png)
 
 ### Data
 
-3 SQL tables:
+10 SQL tables:
 
 - Games
-  - contains general information about each game (name, description, genre, image, developer, release date, platforms)
-- SubscriptionServices
-  - identifies each service with a unique id, name and description
-- Game_Subscription
-  - join table for many-to-many relationships, linking game ids and service ids
-  - will enable the db to be updated with associations more easily
+  - contains general information about each game (name, description, cover art)
+
+- Publishers, Developers, Genres, Subscription_Services,Platforms
+  - contains names and ids for each respectively
+
+- Game_Developers_Join, Game_Genres_Join, Game_Platforms_Join, Game_Publishers_Join, Game_Subscriptions_Join
+  - join tables to connect each game and its associated details
+
 
 ### Endpoints
 
-* GET /platform?p=platformname
+* GET /games
+ * returns all games in the database
 
+* GET /games/?p=id
   * Returns an array of game objects from a particular platform.
-* GET /genre?g=genrename
 
+* GET /games/?g=id
   * Returns an array of game objects from a particular genre.
-* GET /subscription/:id
 
+* GET /games/?s=:id
   * Returns an array of games that are available on a specific subscription service.
-* GET /searchquery
 
-  * Returns an array of game objects that match the search query.
-* PUT /games
+* GET /games/?q=query
+  * Returns an array of games found with a search query 
 
-  * Updates game objects and the services associated with them
-* POST /game_subscriptions
+* GET /game/id
+  * Returns detailed information for a specific game.
 
-  * Creating the association between games and a particular subscription service
-* DELETE /game_subscriptions
-
-  * Removes associations between multiple games and a particular subscription service
 
 Sample game object GET response:
 
 ```
-[
-    {
-        "game_id": 1,
-        "name": "Game Title 1",
-        "description": "Description for Game Title 1",
-        "image": "https://example.com/image1.jpg",
-        "developer": "Developer 1",
-        "release_date": "2022-10-01",
-        "genre": "Action",
-        "platforms": ["PC", "Xbox", "PlayStation"]
-    },
-    {
-        "game_id": 2,
-        "name": "Game Title 2",
-        "description": "Description for Game Title 2",
-        "image": "https://example.com/image2.jpg",
-        "developer": "Developer 2",
-        "release_date": "2021-06-15",
-        "genre": "Action",
-        "platforms": ["PC", "Nintendo Switch"]
-    }
-]
+{
+    "game": [
+        {
+            "game_id": 1,
+            "name": "title",
+            "description": "description",
+            "image": "image_url",
+            "release_date": "2018-03-23T05:00:00.000Z",
+            "developers": [
+                {
+                    "name": "Developer",
+                    "developer_id": 1
+                }
+            ],
+            "publishers": [
+                {
+                    "name": "Publisher",
+                    "publisher_id": 1
+                }
+            ],
+            "platforms": [
+                {
+                    "name": "Platform",
+                    "platform_id": 1
+                }
+            ],
+            "genres": [
+                {
+                    "name": "Genre",
+                    "genre_id": 1
+                }
+            ],
+            "subscription_services": [
+                {
+                    "name": "Subscription Service",
+                    "service_id": 1
+                }
+            ]
+        }
+    ]
+}
 
 ```
 
-## Roadmap
-
-* Populate the database, ensuring all fields are filled properly
-* Build server with general calls
-* Build client in react, with general front-end structure, routes and all pages
-* Feature: Filter by service
-  * Implement the ability to filter by service
-  * create GET endpoint for that array
-* Feature: Search for a game
-  * implement the ability to populate search results from a query
-  * create function to parse that database query and corresponding GET endpoint
-* Feature: filter by genre
-  * implement the ability to filter by genre
-  * create GET endpoint for that array
-* Finalize design and logo
-* Bugfixing and QA testing for edge cases
-
 ---
 
-## Nice-to-haves
-
-* Ability to login as a user
-* Ability to save your subscriptions to your profile, so the game database can reflect all games you have access to
-* Wishlisting games so your profile receives an email alert when a game you've wishlisted is added to a service registered to your profile
-
----
 
 ## Future Implementations
 
+* Humble Bundle inclusion, with a slider for users to identify their membership period and determine what games they have access to
 * Price history and displaying the prices in different stores, with links going to those stores
 * Wishlisting games so your profile receives an email alert when a game you've wishlisted is on sale below a price alert you've set
+* Ability to login as a user
+* Ability to save your subscriptions to your profile, so the game database can reflect all games you have access to
+* Wishlisting games so your profile receives an email alert when a game you've wishlisted is added to a service registered to your profile
