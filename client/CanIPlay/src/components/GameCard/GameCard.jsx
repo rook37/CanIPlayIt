@@ -3,7 +3,7 @@ import { Card, CardMedia, CardContent, Typography, Chip, Stack, useTheme } from 
 import { styled } from '@mui/system';
 import { useNavigate } from 'react-router-dom'
 
-const ServiceOverlay = styled(Stack)(({ theme }) => ({
+const ServiceOverlay = styled(Stack)(() => ({
   position: 'absolute',
   bottom: '0.625rem',
   left: '0.625rem',
