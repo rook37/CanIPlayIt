@@ -100,7 +100,7 @@ From the home page, a user can click on a game, navigate through the pages of th
 ### Tech Stack
 
 - React
-- Express
+- Node & Express
 - MYSQL 
 
 
@@ -192,8 +192,8 @@ Sample game object GET response:
 ## Future Implementations
 
 * Humble Bundle inclusion, with a slider for users to identify their membership period and determine what games they have access to
-* Price history and displaying the prices in different stores, with links going to those stores
-* Wishlisting games so your profile receives an email alert when a game you've wishlisted is on sale below a price alert you've set
 * Ability to login as a user
 * Ability to save your subscriptions to your profile, so the game database can reflect all games you have access to
 * Wishlisting games so your profile receives an email alert when a game you've wishlisted is added to a service registered to your profile
+* Price features and displaying the prices in different stores, with links going to those stores
+* Wishlisting games so users can receives an email alert when a game you've wishlisted is on sale below a price alert you've set
