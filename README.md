@@ -4,10 +4,11 @@
 
 Can I Play It, a web applicaton which displays a wide database of video games on different platforms and services, that can be sorted through and searched to find various games and the services they're offered on
 
+---
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps.
+
 
 ### Installation
 
@@ -46,9 +47,11 @@ To get a local copy up and running follow these simple example steps.
   npm run dev
   ```
 
+---
+
 ### Data Setup
 
-- /server/helper/data/games.json comes prepopulated with game data, but with the provided API endpoints in an .env file, the data can be rebuilt locally.
+- /server/helper/data/games.json comes prepopulated with game data, but with the appropriate endpoints in an .env file, the data can be rebuilt locally.
 
 - Navigate to /server/helper, then run these files:
 
@@ -75,6 +78,8 @@ To get a local copy up and running follow these simple example steps.
 
 As mentioned, the data is already provided - but if you want to try it yourself, these are the steps!
 
+---
+
 ## Usage
 
 ![Homepage](image/image.png)
@@ -96,6 +101,7 @@ From the home page, a user can click on a game, navigate through the pages of th
  - The game page shows the game's description, developers, publisher, genres, and what subscription services it's available on.
  - Each of the subscription service boxes has a link to the homepage filtered by that service, and to the respective provider's site to sign up
 
+---
 
 ### Tech Stack
 
@@ -103,6 +109,7 @@ From the home page, a user can click on a game, navigate through the pages of th
 - Node & Express
 - MYSQL 
 
+---
 
 ### Data
 
@@ -117,6 +124,7 @@ From the home page, a user can click on a game, navigate through the pages of th
 - Game_Developers_Join, Game_Genres_Join, Game_Platforms_Join, Game_Publishers_Join, Game_Subscriptions_Join
   - join tables to connect each game and its associated details
 
+--- 
 
 ### Endpoints
 
