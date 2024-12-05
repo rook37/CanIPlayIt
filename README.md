@@ -90,7 +90,7 @@ From the home page, a user can click on a game, navigate through the pages of th
 
 ####  Hover:
 
-![Hover](image/image-5.png)
+![Hover](image/hover.gif)
 
 #### Sample search:
 
