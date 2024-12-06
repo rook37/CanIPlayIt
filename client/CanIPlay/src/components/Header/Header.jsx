@@ -71,8 +71,8 @@ return (
   <AppBar position="static" color="primary">
     <HeaderBar>
       <Box sx={{ flexGrow: 1 }} />
-      <Typography onClick={handleLogoClick} variant="h2" sx={{ "&:hover": { cursor: 'pointer' },fontStyle:'italic', ...logoStyle }}>
-        Can I Play It?
+      <Typography sx={{ "&:hover": { cursor: 'pointer' },fontStyle:'italic', ...logoStyle }}>
+        <img width='400rem' onClick={handleLogoClick} src='/src/assets/caniplayit.png'></img>
       </Typography>
       <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end' }}>
         <form onSubmit={handleSearchSubmit}>
