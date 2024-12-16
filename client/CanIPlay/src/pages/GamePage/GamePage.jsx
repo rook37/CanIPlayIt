@@ -8,14 +8,15 @@ import axios from 'axios'
 const GamePageContainer = styled(Container)(({theme})=>({
   display: "flex",
   marginTop: "3rem",
-  margin: '3rem 0 0 0',
+  margin: '1.5rem 0 0 0',
   padding: '0',
-  flexDirection: { xs: 'column', lg: "row" },
+  flexDirection: 'column',
   justifyContent: 'center', alignContent: 'center', alignItems: 'center',
   backgroundColor: theme.palette.background.default,
   height: "auto", borderRadius: '0.5rem',
   [theme.breakpoints.up('lg')]:{
-    margin:'3rem auto auto auto',
+    flexDirection:"row" ,
+    margin:'1.5rem auto auto auto',
     padding:'auto'
   }
 
@@ -190,7 +191,7 @@ function GamePage() {
             minHeight: "100vh",
           }}>
           <Header />
-          <GamePageContainer maxWidth="lg">
+          <GamePageContainer maxWidth="xl">
             {studios(true)}
             <GameArtAndGenresBox >
               <GameCoverArtCard>
