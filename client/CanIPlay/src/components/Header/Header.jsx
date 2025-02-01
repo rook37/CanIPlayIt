@@ -72,7 +72,7 @@ return (
     <HeaderBar>
       <Box sx={{ flexGrow: 1 }} />
       <Typography sx={{ "&:hover": { cursor: 'pointer' },fontStyle:'italic', ...logoStyle }}>
-        <img width='400rem' onClick={handleLogoClick} src='/src/assets/caniplayit.png'></img>
+        <img width='400rem' onClick={handleLogoClick} src='../assets/caniplayit.png'></img>
       </Typography>
       <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-end' }}>
         <form onSubmit={handleSearchSubmit}>

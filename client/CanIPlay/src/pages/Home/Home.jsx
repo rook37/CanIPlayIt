@@ -10,7 +10,7 @@ function Home() {
 
   return (
     <>
-   <Box sx={{ backgroundImage:"url('src/assets/background.png')",minHeight: "100vh"}}>
+   <Box sx={{ backgroundImage:"url('../assets/background.png')",minHeight: "100vh"}}>
       <Header/>
       <Navbar/>
       <Container maxWidth='xl' sx={{bgcolor:theme.palette.background.default,height:"100%"}}>
