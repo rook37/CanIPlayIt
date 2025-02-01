@@ -65,7 +65,7 @@ function Gallery() {
 
 	const populateGames = async () => {
 		try {
-			let res = await axios.get('http://localhost:8080/games', {
+			let res = await axios.get('process.env.API_URL:8080/games', {
 				params: {
 					q: searchQuery,
 					p: platforms,
