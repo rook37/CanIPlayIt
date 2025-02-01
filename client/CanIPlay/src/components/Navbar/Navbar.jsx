@@ -3,6 +3,7 @@ import {  AppBar,  Toolbar,  Box,  Typography,  FormGroup,  FormControlLabel,  C
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+const apiUrl=import.meta.REACT_APP_API_URL
 
 const NavCheckbox = styled(Checkbox)(()=>({
   '& .MuiSvgIcon-root': {
@@ -34,9 +35,9 @@ function Navbar() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const servicesRes = await axios.get(`${process.env.REACT_APP_API_URL}:8080/services`);
-      const platsRes = await axios.get(`${process.env.REACT_APP_API_URL}:8080/platforms`);
-      const gensRes = await axios.get(`${process.env.REACT_APP_API_URL}:8080/genres`);
+      const servicesRes = await axios.get(`${apiUrl}:8080/services`);
+      const platsRes = await axios.get(`${apiUrl}:8080/platforms`);
+      const gensRes = await axios.get(`${apiUrl}:8080/genres`);
 
       setServices(servicesRes.data);
       setPlatforms(platsRes.data);
