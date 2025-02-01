@@ -34,9 +34,9 @@ function Navbar() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const servicesRes = await axios.get('http://localhost:8080/services');
-      const platsRes = await axios.get('http://localhost:8080/platforms');
-      const gensRes = await axios.get('http://localhost:8080/genres');
+      const servicesRes = await axios.get(`${process.env.API_URL}:8080/services`);
+      const platsRes = await axios.get(`${process.env.API_URL}:8080/platforms`);
+      const gensRes = await axios.get(`${process.env.API_URL}:8080/genres`);
 
       setServices(servicesRes.data);
       setPlatforms(platsRes.data);
