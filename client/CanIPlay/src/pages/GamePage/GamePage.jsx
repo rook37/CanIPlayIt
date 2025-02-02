@@ -137,7 +137,7 @@ function GamePage() {
   useEffect(() => {
     const populateGame = async () => {
       try {
-        let res = await axios.get(`${apiUrl}:8080/game/${gameId}`)
+        let res = await axios.get(`https://api.caniplayit.com:8080/game/${gameId}`)
         setGame(res.data.game[0])
       } catch (er) {
         console.log(`Error retrieving info for ${gameId}.\n ${er}`)

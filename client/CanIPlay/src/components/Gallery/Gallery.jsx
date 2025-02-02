@@ -66,7 +66,7 @@ function Gallery() {
 
 	const populateGames = async () => {
 		try {
-			let res = await axios.get(`${apiUrl}:8080/games`, {
+			let res = await axios.get(`https://api.caniplayit.com:8080/games`, {
 				params: {
 					q: searchQuery,
 					p: platforms,
