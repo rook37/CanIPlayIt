@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 import { Box, Typography, useTheme, styled } from '@mui/material';
 
+const apiUrl=import.meta.REACT_APP_API_URL
 
 const GalleryPages = styled(Pagination)(({ theme }) => ({
   paddingBottom:'1rem',
@@ -65,7 +66,7 @@ function Gallery() {
 
 	const populateGames = async () => {
 		try {
-			let res = await axios.get(`${process.env.REACT_APP_API_URL}:8080/games`, {
+			let res = await axios.get(`${apiUrl}:8080/games`, {
 				params: {
 					q: searchQuery,
 					p: platforms,

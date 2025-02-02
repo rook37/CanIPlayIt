@@ -5,6 +5,8 @@ import { useParams, useNavigate, Link } from 'react-router-dom'
 import { styled } from '@mui/system';
 import axios from 'axios'
 
+const apiUrl=import.meta.REACT_APP_API_URL
+
 const GamePageContainer = styled(Container)(({theme})=>({
   display: "flex",
   marginTop: "3rem",
@@ -135,7 +137,7 @@ function GamePage() {
   useEffect(() => {
     const populateGame = async () => {
       try {
-        let res = await axios.get(`${process.env.REACT_APP_API_URL}:8080/game/${gameId}`)
+        let res = await axios.get(`${apiUrl}:8080/game/${gameId}`)
         setGame(res.data.game[0])
       } catch (er) {
         console.log(`Error retrieving info for ${gameId}.\n ${er}`)
