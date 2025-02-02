@@ -35,9 +35,9 @@ function Navbar() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const servicesRes = await axios.get(`${apiUrl}:8080/services`);
-      const platsRes = await axios.get(`${apiUrl}:8080/platforms`);
-      const gensRes = await axios.get(`${apiUrl}:8080/genres`);
+      const servicesRes = await axios.get(`https://api.caniplayit.com:8080/services`);
+      const platsRes = await axios.get(`https://api.caniplayit.com:8080/platforms`);
+      const gensRes = await axios.get(`https://api.caniplayit.com:8080/genres`);
 
       setServices(servicesRes.data);
       setPlatforms(platsRes.data);
